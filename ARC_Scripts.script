@@ -1,11 +1,25 @@
 tool_serial_config(True, 115200, 0, 1,8,True)
-tool_modbus_write_registers (9, 0x03E8, 0x0900)
+
+# Activate gripper
+def a():
+  com=[0x0000,0x0000,0x0000]
+  tool_modbus_write_registers(9,0x03E8,com)
+  sleep(5)
+
+# Close gripper
+def c():
+  com=[0x0900, 0x00FF, 0xFFFF]
+  tool_modbus_write_registers(9,0x3E8,com)
+  sleep(3)
+
+# Open Gripper
+def o():
+  com=[0x0900, 0x0000, 0xFFFF]
+  tool_modbus_write_registers(9,0x3E8,com)
+  sleep(3)
+
+# main
+a()
 while True:
-  sleep(3)
-
-  tool_modbus_write_registers (9, 0x03E9, 0x00FF)
-  tool_modbus_write_registers (9, 0x03EA, 7530)
-  sleep(3)
-
-  tool_modbus_write_registers (9, 0x03E9, 0x0000)
-  tool_modbus_write_registers (9, 0x03EA, 0xFFFF)
+  c()
+  o()

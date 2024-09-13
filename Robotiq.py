@@ -4,7 +4,6 @@ robotiq 그리퍼 동작.
 pip install minimalmodbus==2.1.1
 '''
 
-
 import minimalmodbus
 import time
 
@@ -18,10 +17,10 @@ instrument.serial.timeout = 0.5
 
 # 그리퍼 활성화 함수
 def activate_gripper():
-    command = [0x0100, 0x0000, 0x0000]  # 그리퍼 활성화 명령
+    command = [0x0000, 0x0000, 0x0000]  # 그리퍼 활성화 명령
     instrument.write_registers(1000, command)  # 주소 1000부터 명령 전송
     print('그리퍼활성화',command)
-    time.sleep(1)  # 활성화 후 잠시 대기
+    time.sleep(5)  # 활성화 후 잠시 대기
 
 # 그리퍼 닫기 함수
 def close_gripper():
